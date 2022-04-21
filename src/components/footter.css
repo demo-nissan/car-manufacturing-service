@@ -1,0 +1,7 @@
+.footterMain{
+    flex-shrink: 0;
+    text-align: center;
+    background-color: #2596be;
+    color: white;
+    height: 50px;
+}
