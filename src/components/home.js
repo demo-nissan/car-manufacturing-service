@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
@@ -10,14 +11,23 @@ import TabPanel from '@mui/lab/TabPanel';
 import Button from '@mui/material/Button';
 import Plant from './Plant/plant';
 import Group from './Group/Group'
+import Modal from '@mui/material/Modal';
+import Backdrop from '@mui/material/Backdrop';
+
+import CreateUpdate from './createUpdate';
 import './home.css';
 
 function Home() {
-    const [value, setValue] = React.useState('1');
+    const [value, setValue] = useState('1');
+    const [open, setOpen] = useState(false);
 
     const handleChange = (event, newValue) => {
       setValue(newValue);
     };
+
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
     return (
       <div className='homeDiv'>
         <Card sx={{ maxWidth: 345 }}>
@@ -26,8 +36,23 @@ function Home() {
                 Manufacturing Informations
                 </Typography>
                 <div className="createButtonDiv">
-                    <Button variant="contained">Create</Button>
+                    <Button variant="contained" onClick={handleOpen}>Create</Button>    
                 </div>
+                <Modal
+                    aria-labelledby="transition-modal-title"
+                    aria-describedby="transition-modal-description"
+                    open={open}
+                    onClose={handleClose}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                    timeout: 500,
+                    }}
+                > 
+                  <div>
+                        <CreateUpdate handleClose={handleClose} />    
+                   </div>    
+                 </Modal>
             </CardContent>
             <Box sx={{ width: '100%', typography: 'body1' }}>
                 <TabContext value={value}>
