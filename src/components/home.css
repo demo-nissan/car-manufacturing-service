@@ -1,4 +1,7 @@
-.mainHomediv{
+.homeDiv{
     height: 80%;
-    
+}
+.createButtonDiv{
+    float: right;
+    margin-right: 10%;
 }

@@ -4,10 +4,10 @@ import Footter from "./footter";
 
 function MainHome() {
   return (
-    <div >
-     <Header/>
-     <Home/>
-     <Footter/>
+    <div className="mainHome">
+      <Header/>
+      <Home/>
+      <Footter/>
     </div>
   );
 }

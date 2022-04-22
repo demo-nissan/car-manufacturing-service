@@ -1,9 +1,9 @@
-
+import './footter.css'
 
 function Footter() {
     return (
-      <div >
-       footter
+      <div className='footterMain'>
+       
       </div>
     );
   }
