@@ -9,6 +9,7 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Button from '@mui/material/Button';
 import Plant from './Plant/plant';
+import Group from './Group/Group'
 import './home.css';
 
 function Home() {
