@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -14,7 +15,6 @@ function Plant() {
             plantCode: "2c1",
             plantName : "Nissan",
             country:"India",
-            status:"active",
                 Group: [{
                     GroupCode: "2c1",
                     GroupName : "Nissan",
@@ -36,7 +36,6 @@ function Plant() {
                 plantCode: "2c2",
                 plantName : "Nissan",
                 country:"India",
-                status:"deactive",
                     Group: [{
                         GroupCode: "2c1",
                         GroupName : "Nissan",
@@ -56,6 +55,16 @@ function Plant() {
                 },
             ]
         }
+
+  const [buttonStatus, setButtonStatus] = useState(true);
+  const handleActivateButton =(id)=>{
+    setButtonStatus(false)
+    console.log(id)
+  }
+  const handledeActivateButton =()=>{
+    setButtonStatus(true)
+  }
+  
         
 
   return (
@@ -85,11 +94,13 @@ function Plant() {
                                         <Button variant="contained">Edit</Button>
                                     </TableCell>
                                     <TableCell >
-                                        {item.status ==="active"? (<Button variant="contained" disabled>
+                                        {buttonStatus ?(<Button variant="contained" onClick={()=>handleActivateButton(item.plantCode)} color="error">
                                             Deactivate
-                                        </Button>):(<Button variant="contained" >
+                                        </Button>):( <Button variant="contained"  onClick={handledeActivateButton}>
                                             active
-                                        </Button>)} 
+                                        </Button>) }
+                                       
+                                       
                                     </TableCell>
                                 </TableRow>
                               ))}  
