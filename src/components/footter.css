@@ -1,7 +1,9 @@
 .footterMain{
-    flex-shrink: 0;
+    width: 100%;
     text-align: center;
     background-color: #2596be;
-    color: white;
     height: 50px;
+    bottom: 0;
+    overflow: hidden;
+    position: absolute;
 }

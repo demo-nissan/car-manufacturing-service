@@ -17,13 +17,13 @@ const style = {
     p: 4,
   };
 
-function CreateUpdate({handleClose}) {
-    
+function CreateUpdate({createOrUpdateStatus,handleClose, headerMenuValue}) {
+
   return (
     <div>
           <Box sx={style}>
             <span className='closeIcon'>  <CloseIcon onClick={handleClose}/></span>
-            <div className="createMainLabel"> Create Plant..</div>
+            <div className="createMainLabel"> {createOrUpdateStatus}<span>{' '}</span>{(headerMenuValue === '1' && (<>Plant</>)) || (headerMenuValue === '2' && (<>Group</>))  || (headerMenuValue === '3' && (<>Zone</>))}</div>
             <div>
                 <div className='groupCodeTextBox'>
                     <TextField id="outlined-basic" label="Group Code" variant="outlined" />
