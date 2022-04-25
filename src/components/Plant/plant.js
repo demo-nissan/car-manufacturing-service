@@ -7,8 +7,11 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import Modal from '@mui/material/Modal';
+import Backdrop from '@mui/material/Backdrop';
+import CreateUpdate from '../createUpdate';
 
-function Plant() {
+function Plant({menuTabValue}) {
     let mockData={
         Plant :  [
             {
@@ -57,6 +60,8 @@ function Plant() {
         }
 
   const [buttonStatus, setButtonStatus] = useState(true);
+  const [open, setOpen] = useState(false);
+
   const handleActivateButton =(id)=>{
     setButtonStatus(false)
     console.log(id)
@@ -64,11 +69,11 @@ function Plant() {
   const handledeActivateButton =()=>{
     setButtonStatus(true)
   }
-  
-        
 
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+       
   return (
-    
     <div>
         <TableContainer component={Paper}> 
             <Table sx={{ minWidth: 650 }}   aria-label="a dense table">
@@ -81,6 +86,19 @@ function Plant() {
                         <TableCell >Status</TableCell>
                     </TableRow>
                         </TableHead>
+                        <Modal
+                            aria-labelledby="transition-modal-title"
+                            aria-describedby="transition-modal-description"
+                            open={open}
+                            onClose={handleClose}
+                            closeAfterTransition
+                            BackdropComponent={Backdrop}
+                            BackdropProps={{
+                            timeout: 500,
+                            }}
+                        > 
+                            <CreateUpdate createOrUpdateStatus={'Update'} handleClose={handleClose} headerMenuValue={menuTabValue}/>
+                        </Modal>
                             <TableBody>
                              {mockData.Plant.map((item) => (
                                 <TableRow
@@ -91,7 +109,7 @@ function Plant() {
                                     <TableCell >{item.plantName}</TableCell>
                                     <TableCell >{item.country}</TableCell>
                                     <TableCell >
-                                        <Button variant="contained">Edit</Button>
+                                        <Button variant="contained" onClick={handleOpen}>Edit</Button>
                                     </TableCell>
                                     <TableCell >
                                         {buttonStatus ?(<Button variant="contained" onClick={()=>handleActivateButton(item.plantCode)} color="error">
