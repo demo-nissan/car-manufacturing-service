@@ -33,7 +33,7 @@ function Home() {
         <Card sx={{ maxWidth: 345 }}>
             <CardContent>
                 <Typography gutterBottom variant="h5" component="div">
-                Manufacturing Informations
+                   Manufacturing Informations
                 </Typography>
                 <div className="createButtonDiv">
                     <Button variant="contained" onClick={handleOpen}>Create</Button>    
@@ -50,7 +50,7 @@ function Home() {
                     }}
                 > 
                   <div>
-                        <CreateUpdate handleClose={handleClose} />    
+                        <CreateUpdate createOrUpdateStatus={'Create'} handleClose={handleClose} headerMenuValue={value} />    
                    </div>    
                  </Modal>
             </CardContent>
@@ -64,7 +64,7 @@ function Home() {
                     </TabList>
                     </Box>
                     <TabPanel value="1">
-                        <Plant/>
+                        <Plant menuTabValue={value} />
                     </TabPanel>
                     <TabPanel value="2"><Group/></TabPanel>
                     <TabPanel value="3">Item Three</TabPanel>
