@@ -9,11 +9,31 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import './Group.module.css';
 
+const mockData = [{
+    GroupCode: "1",
+    GroupName : "Wheel",
+    active:true
+},{
+    GroupCode: "2",
+    GroupName : "Interior",
+    active:false
+},
+{
+    GroupCode: "3",
+    GroupName : "Exterior",
+    active:true
+}
+]
 function Group(props) {
-    const [activeGroup, setActiveGroup] = React.useState(true);
-
+    const [groupData, setGroupData] = React.useState(mockData);
     const handleClick = (newValue) => {
-        setActiveGroup(newValue);
+        groupData.map(data=>{
+            if(data.GroupCode === newValue.GroupCode){
+                data.active = !data.active;
+            }
+            return data;
+        })
+        setGroupData(groupData);
     };
     return (
         <div className="Group" data-testid="Group">
@@ -28,15 +48,20 @@ function Group(props) {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        <TableRow
+                        {
+                        groupData.map((data)=>(<TableRow
                             key="1"
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
-                            <TableCell > 1</TableCell>
-                            <TableCell >2</TableCell>
+                            <TableCell > {data.GroupCode}</TableCell>
+                            <TableCell >{data.GroupName}</TableCell>
                             <TableCell ><Button variant="outlined" color="info">Edit</Button></TableCell>
-                            <TableCell ><Button variant="contained" onClick={() => { activeGroup ? handleClick(false) : handleClick(true) }} color={activeGroup ? 'success' : 'error'}>{activeGroup ? 'Activate' : 'Deactivate'}</Button></TableCell>
-                        </TableRow>
+                            <TableCell ><Button variant="contained" onClick={() => { handleClick(data) }} 
+                            color={data.active ? 'success' : 'error'}>{data.active ? 'Activate' : 'Deactivate'}</Button>
+                            </TableCell>
+                        </TableRow>)
+                        )
+                        }
                     </TableBody>
                 </Table>
             </TableContainer>
