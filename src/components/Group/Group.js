@@ -26,14 +26,11 @@ const mockData = [{
 ]
 function Group(props) {
     const [groupData, setGroupData] = React.useState(mockData);
-    const handleClick = (newValue) => {
-        groupData.map(data=>{
-            if(data.GroupCode === newValue.GroupCode){
-                data.active = !data.active;
-            }
-            return data;
-        })
-        setGroupData(groupData);
+    const handleClick = (newValue,i) => {
+        console.log(newValue,i);
+        const list = [...groupData];
+        list[i]['active']=newValue?false:true;
+        setGroupData(list);
     };
     return (
         <div className="Group" data-testid="Group">
@@ -49,17 +46,19 @@ function Group(props) {
                     </TableHead>
                     <TableBody>
                         {
-                        groupData.map((data)=>(<TableRow
+                        groupData.map((data,i)=>{
+                            return(<TableRow
                             key="1"
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell > {data.GroupCode}</TableCell>
                             <TableCell >{data.GroupName}</TableCell>
                             <TableCell ><Button variant="outlined" color="info">Edit</Button></TableCell>
-                            <TableCell ><Button variant="contained" onClick={() => { handleClick(data) }} 
+                            <TableCell ><Button variant="contained" onClick={() => { handleClick(data.active,i) }} 
                             color={data.active ? 'success' : 'error'}>{data.active ? 'Activate' : 'Deactivate'}</Button>
                             </TableCell>
                         </TableRow>)
+                        }
                         )
                         }
                     </TableBody>
