@@ -18,62 +18,63 @@ import CreateUpdate from './createUpdate';
 import './home.css';
 
 function Home() {
-    const [value, setValue] = useState('1');
-    const [open, setOpen] = useState(false);
+  const [value, setValue] = useState('1');
+  const [open, setOpen] = useState(false);
 
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    };
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
 
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
-    return (
-      <div className='homeDiv'>
-        <Card sx={{ maxWidth: 345 }}>
-            <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                   Manufacturing Informations
-                </Typography>
-                <div className="createButtonDiv">
-                    <Button variant="contained" onClick={handleOpen}>Create</Button>    
-                </div>
-                <Modal
-                    aria-labelledby="transition-modal-title"
-                    aria-describedby="transition-modal-description"
-                    open={open}
-                    onClose={handleClose}
-                    closeAfterTransition
-                    BackdropComponent={Backdrop}
-                    BackdropProps={{
-                    timeout: 500,
-                    }}
-                > 
-                  <div>
-                        <CreateUpdate createOrUpdateStatus={'Create'} handleClose={handleClose} headerMenuValue={value} />    
-                   </div>    
-                 </Modal>
-            </CardContent>
-            <Box sx={{ width: '100%', typography: 'body1' }}>
-                <TabContext value={value}>
-                    <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-                    <TabList onChange={handleChange} aria-label="lab API tabs example">
-                        <Tab label="Plant " value="1" />
-                        <Tab label="Group" value="2" />
-                        <Tab label="Zone" value="3" />
-                    </TabList>
-                    </Box>
-                    <TabPanel value="1">
-                        <Plant menuTabValue={value} />
-                    </TabPanel>
-                    <TabPanel value="2"><Group/></TabPanel>
-                    <TabPanel value="3">Item Three</TabPanel>
-                </TabContext>
+  return (
+    <div className='homeDiv'>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            Manufacturing Informations
+          </Typography>
+          <div className="createButtonDiv">
+            <Button variant="contained" onClick={handleOpen}>Create</Button>
+          </div>
+          <Modal
+            aria-labelledby="transition-modal-title"
+            aria-describedby="transition-modal-description"
+            open={open}
+            onClose={handleClose}
+            closeAfterTransition
+            BackdropComponent={Backdrop}
+            BackdropProps={{
+              timeout: 500,
+            }}
+          >
+            <div>
+              <CreateUpdate createOrUpdateStatus={'Create'} handleClose={handleClose} headerMenuValue={value} />
+            </div>
+          </Modal>
+        </CardContent>
+        <Box sx={{ width: '100%', typography: 'body1' }}>
+          <TabContext value={value}>
+            <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+              <TabList onChange={handleChange} aria-label="lab API tabs example">
+                <Tab label="Plant " value="1" />
+                <Tab label="Group" value="2" />
+                <Tab label="Zone" value="3" />
+              </TabList>
             </Box>
-       </Card>
-      </div>
-    );
-  }
-  
-  export default Home;
-  
+            <TabPanel value="1">
+              <Plant menuTabValue={value} />
+            </TabPanel>
+            <TabPanel value="2">
+              <Group menuTabValue={value} />
+            </TabPanel>
+            <TabPanel value="3">Item Three</TabPanel>
+          </TabContext>
+        </Box>
+      </Card>
+    </div>
+  );
+}
+
+export default Home;
