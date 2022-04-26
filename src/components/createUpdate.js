@@ -26,10 +26,10 @@ function CreateUpdate({createOrUpdateStatus,handleClose, headerMenuValue}) {
             <div className="createMainLabel"> {createOrUpdateStatus}<span>{' '}</span>{(headerMenuValue === '1' && (<>Plant</>)) || (headerMenuValue === '2' && (<>Group</>))  || (headerMenuValue === '3' && (<>Zone</>))}</div>
             <div>
                 <div className='groupCodeTextBox'>
-                    <TextField id="outlined-basic" label="Group Code" variant="outlined" />
+                    <TextField id="outlined-basic" label={(headerMenuValue === '1' && (<>Plant Code</>)) || (headerMenuValue === '2' && (<>Group Code</>))  || (headerMenuValue === '3' && (<>Zone Code</>))} variant="outlined" />
                 </div>
                 <div className='GroupNameTextbox'>
-                    <TextField id="outlined-basic" label="Group Name" variant="outlined" />
+                    <TextField id="outlined-basic" label={(headerMenuValue === '1' && (<>Plant Name</>)) || (headerMenuValue === '2' && (<>Group Name</>))  || (headerMenuValue === '3' && (<>Zone Name</>))}variant="outlined" />
                 </div>
                 <div className='submitButton'>
                     <Button variant="contained"  >Submit</Button>
