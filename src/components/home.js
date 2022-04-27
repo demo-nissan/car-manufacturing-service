@@ -9,7 +9,8 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Button from '@mui/material/Button';
 import Plant from './Plant/plant';
-import Group from './Group/Group'
+import Group from './Group/Group';
+import Zone from './Zone/zone';
 import './home.css';
 
 function Home() {
@@ -42,7 +43,7 @@ function Home() {
                         <Plant/>
                     </TabPanel>
                     <TabPanel value="2"><Group/></TabPanel>
-                    <TabPanel value="3">Item Three</TabPanel>
+                    <TabPanel value="3"><Zone/></TabPanel>
                 </TabContext>
             </Box>
        </Card>

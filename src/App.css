@@ -36,3 +36,10 @@
     transform: rotate(360deg);
   }
 }
+
+.white{
+  color:white
+}
+.MuiButton-text{
+  color:white
+}
