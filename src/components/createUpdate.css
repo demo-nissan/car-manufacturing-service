@@ -1,0 +1,19 @@
+.createMainLabel{
+    text-align: center;
+    height: 50px;
+    font-size: xx-large;
+}
+.closeIcon{
+    padding-left: 98%;
+}
+.submitButton{
+    padding-top: 15px;
+    align-items: center;
+    margin-left: 50%;
+}
+.groupCodeTextBox{
+    padding-top: 15px;
+}
+.GroupNameTextbox{
+    padding-top: 15px;
+}
