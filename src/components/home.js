@@ -10,10 +10,10 @@ import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import Button from '@mui/material/Button';
 import Plant from './Plant/plant';
+import Zone from './Zone/zone';
 import Group from './Group/Group'
 import Modal from '@mui/material/Modal';
 import Backdrop from '@mui/material/Backdrop';
-
 import CreateUpdate from './createUpdate';
 import './home.css';
 
@@ -69,7 +69,9 @@ function Home() {
             <TabPanel value="2">
               <Group menuTabValue={value} />
             </TabPanel>
-            <TabPanel value="3">Item Three</TabPanel>
+            <TabPanel value="3">
+              <Zone menuTabValue={value} />
+            </TabPanel>
           </TabContext>
         </Box>
       </Card>
