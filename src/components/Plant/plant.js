@@ -65,7 +65,7 @@ function Plant({menuTabValue}) {
                     plantCode: "2c3",
                     plantName : "Nissan",
                     country:"India",
-                    active: false,
+                    active: true,
                         Group: [{
                             GroupCode: "2c1",
                             GroupName : "Nissan",
@@ -154,12 +154,10 @@ function Plant({menuTabValue}) {
 
  
   const [open, setOpen] = useState(false);
-  const [stateMockData, setStateMockData]=useState(mockData);
+  const [stateMockData, setStateMockData]=useState(mockData.Plant);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(4);  
-  const [editablePlantCode, setEditablePlantCode]=useState('')
-  const [editablePlantName, setEditablePlantName]=useState('')
-
+  const [editableData, setEditableData]=useState('')
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -171,18 +169,15 @@ function Plant({menuTabValue}) {
   };
 
   const handleActivateDeactivateButton =( buttonStatus, item, i)=>{
-      let tempMockData=item
-      let completeMockData=stateMockData;
-      tempMockData.active=buttonStatus ? false : true;
-      completeMockData.push(tempMockData)
-      setStateMockData(completeMockData)  
+    const list = [...stateMockData];
+    console.log(list);
+    list[i]['active'] = buttonStatus ? false : true;
+    setStateMockData(list);
   }
   
-  const handleOpen = (plantCodeValue, plantNameValue) => {
-    setEditablePlantCode(plantCodeValue);
-    setEditablePlantName(plantNameValue);
-    //   console.log("++",editablePlantCodeValue, editablePlantNameValue)
-      setOpen(true); 
+  const handleOpen = (itemValue) => {
+    setEditableData(itemValue);
+    setOpen(true); 
     }
     
   const handleClose = () => setOpen(false);
@@ -212,10 +207,10 @@ function Plant({menuTabValue}) {
                             timeout: 500,
                             }}
                         > 
-                            <CreateUpdate createOrUpdateStatus={'Update'} handleClose={handleClose} headerMenuValue={menuTabValue} codeValue={editablePlantCode} codeName={editablePlantName}/>
+                            <CreateUpdate createOrUpdateStatus={'Update'} handleClose={handleClose} headerMenuValue={menuTabValue} updateData={editableData} />
                         </Modal>
                             <TableBody>
-                             {stateMockData.Plant
+                             {stateMockData
                              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                              .map((item, i) => (
                                 <TableRow
@@ -226,7 +221,7 @@ function Plant({menuTabValue}) {
                                     <TableCell width="20%">{item.plantName}</TableCell>
                                     <TableCell width="20%">{item.country}</TableCell>
                                     <TableCell width="20%">
-                                        <Button variant="contained" onClick={()=>handleOpen(item.plantCode,item.plantName)} startIcon={<EditIcon />}>Edit</Button>
+                                        <Button variant="contained" onClick={()=>handleOpen(item)} startIcon={<EditIcon />}>Edit</Button>
                                     </TableCell>
                                     <TableCell width="20%">
                                         <Button variant="contained" fullWidth="false" onClick={() => { handleActivateDeactivateButton( item.active, item, i) }}
@@ -241,7 +236,7 @@ function Plant({menuTabValue}) {
         <TablePagination
             rowsPerPageOptions={[4, 10, 25]}
             component="div"
-            count={stateMockData.Plant.length}
+            count={stateMockData.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

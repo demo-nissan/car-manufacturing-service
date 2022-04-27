@@ -17,8 +17,11 @@ const style = {
     p: 4,
   };
 
-function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, codeValue, codeName}) {
+function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, updateData}) {
 
+  const editValueCode = headerMenuValue=== '1' ? updateData.plantCode : '';
+  const editValueName = headerMenuValue=== '1' ? updateData.plantName : '';
+  console.log("===",editValueCode, editValueName )
   let createUpdateStatus=createOrUpdateStatus==='Update' ? true: false;
 
   return (
@@ -28,10 +31,10 @@ function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, codeV
             <div className="createMainLabel"> {createOrUpdateStatus}<span>{' '}</span>{(headerMenuValue === '1' && (<>Plant</>)) || (headerMenuValue === '2' && (<>Group</>))  || (headerMenuValue === '3' && (<>Zone</>))}</div>
             <div>
                 <div className='groupCodeTextBox'>
-                    <TextField id="outlined-basic" disabled={createUpdateStatus} value={codeValue} label={(headerMenuValue === '1' && (<>Plant Code</>)) || (headerMenuValue === '2' && (<>Group Code</>))  || (headerMenuValue === '3' && (<>Zone Code</>))} variant="outlined" />
+                    <TextField id="outlined-basic" disabled={createUpdateStatus} value={editValueCode} label={(headerMenuValue === '1' && (<>Plant Code</>)) || (headerMenuValue === '2' && (<>Group Code</>))  || (headerMenuValue === '3' && (<>Zone Code</>))} variant="outlined" />
                 </div>
                 <div className='GroupNameTextbox'>
-                    <TextField id="outlined-basic" value={codeName} label={(headerMenuValue === '1' && (<>Plant Name</>)) || (headerMenuValue === '2' && (<>Group Name</>))  || (headerMenuValue === '3' && (<>Zone Name</>))}variant="outlined" />
+                    <TextField id="outlined-basic" value={editValueName}  label={(headerMenuValue === '1' && (<>Plant Name</>)) || (headerMenuValue === '2' && (<>Group Name</>))  || (headerMenuValue === '3' && (<>Zone Name</>))}variant="outlined" />
                 </div>
                 <div className='submitButton'>
                     <Button variant="contained"  >Submit</Button>
