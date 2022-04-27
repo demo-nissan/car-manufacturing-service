@@ -47,7 +47,7 @@ function Group({ menuTabValue }) {
     const handleClose = () => setOpen(false);
     const handleClick = (rowData) => {
         const list = [...groupData]
-        let i  = groupData.findIndex((data)=>{
+        const i  = groupData.findIndex((data)=>{
             return data.GroupCode === rowData.GroupCode;
         })
         
