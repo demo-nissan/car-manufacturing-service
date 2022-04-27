@@ -1,3 +1,4 @@
+import React from 'react';
 import Table from '@mui/material/Table';
 import TableHead from '@mui/material/TableHead';
 import TableBody from '@mui/material/TableBody';
@@ -6,21 +7,39 @@ import TableRow from '@mui/material/TableRow';
 import TableCell from '@mui/material/TableCell';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import EditIcon from '@mui/icons-material/Edit';
 //import { createTheme } from '@mui/system';
 import {createTheme, ThemeProvider} from '@mui/material/styles'
 import { useDispatch, useSelector } from 'react-redux';
-import { getZoneActivate, setZoneActivate } from '../../actions/actions';
+import { getZoneActivate, setZoneActivate, getZoneData, setZoneData } from '../../actions/actions';
+import { useEffect } from 'react';
+import Modal from '@mui/material/Modal';
+import Backdrop from '@mui/material/Backdrop';
+import CreateUpdate from '../createUpdate';
 
-function Zone() {
+function Zone({menuTabValue}) {
 
     const zoneActivate = useSelector(state => state.reducer.cmsReducer.zoneActivate);
+    const zoneData = useSelector(state => state.reducer.cmsReducer.zoneData);
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
     const dispatch  = useDispatch();
-    var activateButton = zoneActivate?"Active":"InActive";
-    var activateButtonColor = zoneActivate?"Success":"";
 
-    function updateActivate(){
+    useEffect(()=>{
+        dispatch(getZoneData());
+    },[]);
+
+    function updateActivate(data,i){
+
+        console.log("$%$%$%$%$%%$");
+        console.log(data)
+        console.log("$%$%$%$%$%%$");
+
+        data.Plant[i].status = "InActive";
         var newState = !zoneActivate;
         dispatch(setZoneActivate(newState));
+        //dispatch(setZoneData(data))
 
     }
 
@@ -30,60 +49,11 @@ function Zone() {
                 main:'#11cb5f'
             }
         }
-    })
-    let apiData={
-        Plant :  [
-            {
-            plantCode: "2c1",
-            plantName : "Nissan",
-            country:"India",
-            status:"active",
-                Group: [{
-                    GroupCode: "2c1",
-                    GroupName : "Nissan",
-                        Zone: [{
-                        ZoneCode: "NSNKOCHI",
-                        ZoneName : "Nissan Kochi",
-                        }]
-                    },{
-                    GroupCode: "2c1",
-                    GroupName : "Nissan",
-                        Zone: [{
-                            ZoneCode: "NSNTVM",
-                            ZoneName : "Nissan Tvm",
-                        }]
-                    },]
-        
-            },
-            {
-                plantCode: "2c2",
-                plantName : "Nissan",
-                country:"India",
-                status:"deactive",
-                    Group: [{
-                        GroupCode: "2c1",
-                        GroupName : "Nissan",
-                            Zone: [{
-                            ZoneCode: "NSNBAN",
-                            ZoneName : "Nissan BAN",
-                            }]
-                        },{
-                        GroupCode: "2c1",
-                        GroupName : "Nissan",
-                            Zone: [{
-                                ZoneCode: "NSNCHN",
-                                ZoneName : "Nissan Chennai",
-                            }]
-                        },]
-            
-                },
-            ]
-        }
-        
-        
-
+    })  
+    
   return (
-    <div>
+     
+        <div>
         <TableContainer component={Paper}> 
             <Table sx={{ minWidth: 650 }}   aria-label="a dense table">
                 <TableHead>
@@ -95,8 +65,22 @@ function Zone() {
                         <TableCell >Status</TableCell>
                     </TableRow>
                         </TableHead>
+                        <Modal
+                            aria-labelledby="transition-modal-title"
+                            aria-describedby="transition-modal-description"
+                            open={open}
+                            onClose={handleClose}
+                            closeAfterTransition
+                            BackdropComponent={Backdrop}
+                            BackdropProps={{
+                                timeout: 500,
+                            }}
+                        >
+                            <CreateUpdate createOrUpdateStatus={'Update'} handleClose={handleClose} headerMenuValue={menuTabValue} />
+                        </Modal>
+
                             <TableBody>
-                             {apiData.Plant.map((plant, i) => (
+                             {zoneData && zoneData.Plant.map((plant, i) => (
                                     plant.Group.map((group, j) => (
                                             group.Zone.map((item, k) => (
                                                 <TableRow
@@ -107,19 +91,14 @@ function Zone() {
                                                     <TableCell >{item.ZoneName}</TableCell>
                                                     <TableCell >{plant.country}</TableCell>
                                                     <TableCell >
-                                                        <Button variant="contained">Edit</Button>
+                                                        <Button variant="contained" color="info" startIcon={<EditIcon />}
+                                                            onClick={handleOpen}>Edit</Button>
                                                     </TableCell>
                                                     <TableCell >
                                                     <ThemeProvider theme={theme}>
-                                                        {plant.status ==="active"? (
-                                                            
-                                                            <Button   variant="contained" disabled>
-                                                                Deactivate
-                                                            </Button>):(<Button onClick={updateActivate} color="success" variant="contained" >
-                                                                {activateButton}
-                                                            </Button>
-                                                            
-                                                        )} 
+                                                        <Button variant="contained" onClick={() => { updateActivate(zoneData,i) }}
+                                                            color={zoneActivate ? 'success' : 'error'}>{zoneActivate ? 'Activate' : 'Deactivate'}
+                                                        </Button>
                                                         </ThemeProvider>
                                                     </TableCell>
                                                 </TableRow>
@@ -130,6 +109,7 @@ function Zone() {
                         </Table>
         </TableContainer>
     </div>
+    
   );
 }
 
