@@ -4,6 +4,10 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import CloseIcon from '@mui/icons-material/Close';
 import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
+import InputLabel from '@mui/material/InputLabel';
+import FormControl from '@mui/material/FormControl';
+import { useDispatch, useSelector } from 'react-redux';
 import './createUpdate.css'
 import { useState } from "react";
 
@@ -21,11 +25,29 @@ const style = {
 
 function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, updateData, indexValue}) {
 
+  const[productCodeValue, setProductCodeValue]=useState(0);
+  const[groupCodeValue, setGroupCodeValue]=useState(0)
   const[editValueCode, setEditValueCode]=useState(headerMenuValue=== '1' ? updateData.plantCode : headerMenuValue=== '2'? updateData.groupCode : updateData.zone_code);
   const[editValueName, setEditValueName]=useState(headerMenuValue=== '1' ? updateData.plantName : headerMenuValue=== '2'?updateData.groupName : updateData.zone_name);
   const[plantCountryName, setPlantCountryName]=useState(updateData?.country)
+  const[groupData, setGroupData]=useState([]);
   let createUpdateStatus=createOrUpdateStatus==='Update' ? true: false;
   const tabValue=headerMenuValue==='1' ? 'plants': headerMenuValue==='2' ? 'groups': 'zones';
+ 
+  const MockData = useSelector(state => state.reducer.cmsReducer.zoneData);
+ 
+
+  console.log(MockData.plants,"MockData")
+  const handleChangePlantCodeValue=(event)=>{
+    setProductCodeValue(event.target.value);
+    setGroupData(event.target.value.groups);
+    console.log(groupData);
+  }
+  
+
+  const handleChangeGroupCodeValue=(e)=>{
+    setGroupCodeValue(e.target.value);
+  }
 
   const handleChangeEditValueCode=(event)=>{
     setEditValueCode(event.target.value);
@@ -42,30 +64,42 @@ function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, updat
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    let bodyValue= headerMenuValue ==='1' ? {
+    let createBodyValue= headerMenuValue ==='1' ? {
           plant_name: editValueCode,
           place: editValueName,
           country: "IND",
           language: "ENG",
           active_flag: true
       } : headerMenuValue ==='2' ? {
-          group_name: "ZN2",
+          group_name: editValueName,
           active_flag: true,
-          group_code:1,
+          plant_code:productCodeValue,
       } : {
           zone_name: "ZN2",
           active_flag: true,
-          plant_code:1,
+          plant_code:productCodeValue,
           group_code:1,
       }
 
+      let updateBodyValue=headerMenuValue ==='1' ? {
+            place: editValueName,
+            country: "IND",
+            language: "ENG",
+        } : headerMenuValue ==='2' ? {
+            group_name: editValueCode,
+        } : {
+            zone_name: editValueCode,
+        }
+
+      
+
     if(createOrUpdateStatus==='Update'){
-    axios.put(`http://localhost:8080/${tabValue}/${indexValue}`)
+    axios.put(`http://localhost:8080/${tabValue}/${indexValue}`, updateBodyValue)
       .then(res => {
         console.log(res);
       });
     }else{
-      axios.post(`http://localhost:8080/${tabValue}`, bodyValue )
+      axios.post(`http://localhost:8080/${tabValue}`, createBodyValue)
       .then(res => {
         console.log(res);
       });
@@ -87,14 +121,39 @@ function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, updat
                   <div className={headerMenuValue === '1' ? "plantCountryTextBox" : "hideCodeValueCss" }  >
                       <TextField id="outlined-basic" value={plantCountryName}  onChange={handleChangePlantCountryValue} label="Plant Country" variant="outlined" />
                   </div>
-                  <div className={headerMenuValue === '1' ? "hideCodeValueCss" : "groupOrZonePlantDropDown" }>
-                      <Select
-                          labelId="demo-simple-select-label"
-                          id="demo-simple-select"
-                          
-                          label="Age"
-                          // onChange={handleChange}
-                        />
+                  <div className={headerMenuValue === '1' || createUpdateStatus ? "hideCodeValueCss" : "groupOrZonePlantDropDown" }>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">Plant Name</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={productCodeValue}
+                            label="Plant Name"
+                            onChange={handleChangePlantCodeValue}
+                        >
+                          <MenuItem value= '0' disabled>Select..</MenuItem>
+                          {MockData.plants.map((data) =>(
+                              <MenuItem value={data}>{data.plantName}</MenuItem>
+                          ))} 
+                        </Select>
+                    </FormControl>
+                  </div>
+                  <div className={headerMenuValue === '3' || createUpdateStatus ? "zoneGroupDropDown" : "hideCodeValueCss" }>
+                    <FormControl fullWidth>
+                      <InputLabel id="demo-simple-select-label">Group Name</InputLabel>
+                        <Select
+                            labelId="demo-simple-select-label"
+                            id="demo-simple-select"
+                            value={groupCodeValue}
+                            label="Group Name"
+                            onChange={handleChangeGroupCodeValue}
+                        >
+                          <MenuItem value= '0' disabled>Select..</MenuItem>
+                          {groupData.map((data) =>(
+                              <MenuItem value={data.groupCode}>{data.groupName}</MenuItem>
+                          ))} 
+                        </Select>
+                    </FormControl>
                   </div>
                   <div className='groupNameTextbox'>
                       <TextField id="outlined-basic" value={editValueName} onChange={handleChangeEditValueName}  label={(headerMenuValue === '1' && (<>Plant Name</>)) || (headerMenuValue === '2' && (<>Group Name</>))  || (headerMenuValue === '3' && (<>Zone Name</>))}variant="outlined" />
