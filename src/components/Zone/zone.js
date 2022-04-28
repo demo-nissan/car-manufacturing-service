@@ -32,10 +32,6 @@ function Zone({menuTabValue}) {
 
     function updateActivate(data,i){
 
-        console.log("$%$%$%$%$%%$");
-        console.log(data)
-        console.log("$%$%$%$%$%%$");
-
         data.Plant[i].status = "InActive";
         var newState = !zoneActivate;
         dispatch(setZoneActivate(newState));
