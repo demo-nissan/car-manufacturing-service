@@ -50,7 +50,7 @@ function Home() {
             }}
           >
             <div>
-              <CreateUpdate createOrUpdateStatus={'Create'} handleClose={handleClose} headerMenuValue={value} />
+              <CreateUpdate createOrUpdateStatus={'Create'} handleClose={handleClose} headerMenuValue={value} updateData={''} />
             </div>
           </Modal>
         </CardContent>
