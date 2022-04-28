@@ -24,13 +24,9 @@ function Home() {
   const [value, setValue] = useState('1');
   const [open, setOpen] = useState(false);
   const dispatch  = useDispatch();
+  dispatch(getZoneData());
 
-  // React.useEffect(() => {
-  //   console.log("useeffect inside home")
-  //   dispatch(getZoneData());
-  // } );
   
-  //  dispatch(getZoneData());
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };

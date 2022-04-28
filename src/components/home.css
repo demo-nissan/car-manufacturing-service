@@ -1,5 +1,6 @@
 .homeDiv{
     height: auto;
+    min-height: 509px;
 }
 .createButtonDiv{
     float: right;

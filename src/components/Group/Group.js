@@ -14,28 +14,24 @@ import Modal from '@mui/material/Modal';
 import Backdrop from '@mui/material/Backdrop';
 import CreateUpdate from '../createUpdate';
 import TablePagination from '@mui/material/TablePagination';
+import { useDispatch, useSelector } from 'react-redux';
+import { getZoneData } from '../../actions/actions';
 
-const mockData = [{
-    groupCode: "1",
-    groupName: "Wheel",
-    activeFlag: true
-}, {
-    groupCode: "2",
-    groupName: "Interior",
-    activeFlag: false
-},
-{
-    groupCode: "3",
-    groupName: "Exterior",
-    activeFlag: true
-}
-]
 function Group({ menuTabValue }) {
-    const [groupData, setGroupData] = React.useState(mockData);
+    let groupArray =[];
+    const MockData = useSelector(state => state.reducer.cmsReducer.zoneData);
+    MockData.plants.forEach(element => {
+        element.groups.forEach(data=>{
+            groupArray.push(data);
+        })
+    });
+    const [groupData, setGroupData] = React.useState([...groupArray]);
+    console.log(groupData)
     const [open, setOpen] = React.useState(false);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const [editableData, setEditableData]=React.useState('');
+    
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -61,7 +57,7 @@ function Group({ menuTabValue }) {
     return (
         <div className="Group" data-testid="Group">
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                <TableContainer component={Paper}>
+                <TableContainer component={Paper} >
                     <Table sx={{ minWidth: 650 }} aria-label="a dense table">
                         <TableHead>
                             <TableRow>

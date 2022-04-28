@@ -16,7 +16,7 @@ import TablePagination from '@mui/material/TablePagination';
 import CreateUpdate from '../createUpdate';
 import { useDispatch, useSelector } from 'react-redux';
 import { getZoneData } from '../../actions/actions';
-import {mockData} from '../mockData/mockData';
+
 
 function Plant({menuTabValue}) { 
   
@@ -24,7 +24,7 @@ function Plant({menuTabValue}) {
   console.log(MockData, "MockData")
  
   const [open, setOpen] = useState(false);
-  const [stateMockData, setStateMockData]=useState(mockData?.plants);
+  const [stateMockData, setStateMockData]=useState(MockData.plants);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(4);  
   const [editableData, setEditableData]=useState('')
