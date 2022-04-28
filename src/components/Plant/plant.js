@@ -21,7 +21,7 @@ import { getZoneData } from '../../actions/actions';
 function Plant({menuTabValue}) { 
   
   const MockData = useSelector(state => state.reducer.cmsReducer.zoneData);
-  console.log(MockData, "MockData")
+
  
   const [open, setOpen] = useState(false);
   const [stateMockData, setStateMockData]=useState(MockData.plants);
@@ -32,7 +32,6 @@ function Plant({menuTabValue}) {
   const dispatch  = useDispatch();
 
   useEffect(() => {
-    console.log("useeffect")
     dispatch(getZoneData());
   }, []);
   

@@ -34,21 +34,20 @@ export const getZoneActivate = id =>{
 // }
 
 export const getZoneData = () =>{
-    let data =mockData;
-    console.log("inside action", mockData)
-    // axios.get('http://localhost:8080/get/all').then((response) => {
-    //     dispatch({
-    //          type:GET_ZONE_DATA,
-    //          payload: response.data,
-    //      })
-    // })
-    // .catch(errors =>{
-    //     console.log(errors)    
-    // });
-    return {
-        type:GET_ZONE_DATA,
-        payload:data,
-    }
+    //let data =mockData;
+    axios.get('http://localhost:8080/group/getAll').then((response) => {
+        dispatch({
+             type:GET_ZONE_DATA,
+             payload: response.data,
+         })
+    })
+    .catch(errors =>{
+        console.log(errors)    
+    });
+    // return {
+    //     type:GET_ZONE_DATA,
+    //     payload:data,
+    // }
 }
 
 export const setZoneData = data =>{
