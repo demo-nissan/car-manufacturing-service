@@ -46,14 +46,14 @@ function Plant({menuTabValue}) {
     setPage(0);
   };
 
-  const handleActivateDeactivateButton =( buttonStatus, item, i)=>{
+  const handleActivateDeactivateButton =( buttonStatus, plantCode, i)=>{
     const list = [...stateMockData];
     console.log(list);
     list[i]['active'] = buttonStatus ? false : true;
     setStateMockData(list);
 
     const baseURL = buttonStatus ? 'http://localhost:8080/plants/deactivate/' : 'http://localhost:8080/plants/activate/';
-    axios.put(`${baseURL}/${i}`).then((response) => {
+    axios.put(`${baseURL}/${plantCode}`).then((response) => {
         console.log(response)
     });
   }
@@ -108,7 +108,7 @@ function Plant({menuTabValue}) {
                                         <Button variant="contained" onClick={()=>handleOpenEdit(item, i)} startIcon={<EditIcon />}>Edit</Button>
                                     </TableCell>
                                     <TableCell width="20%">
-                                        <Button variant="contained" fullWidth="false" onClick={() => { handleActivateDeactivateButton( item.active, item, i) }}
+                                        <Button variant="contained" fullWidth="false" onClick={() => { handleActivateDeactivateButton( item.active, item.plantCode, i) }}
                                             color={item.active ? 'success' : 'error'}>{item.active ? 'Activate' : 'Deactivate'}
                                         </Button>  
                                     </TableCell>
