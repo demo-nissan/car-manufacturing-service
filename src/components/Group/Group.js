@@ -16,18 +16,18 @@ import CreateUpdate from '../createUpdate';
 import TablePagination from '@mui/material/TablePagination';
 
 const mockData = [{
-    GroupCode: "1",
-    GroupName: "Wheel",
-    active: true
+    groupCode: "1",
+    groupName: "Wheel",
+    activeFlag: true
 }, {
-    GroupCode: "2",
-    GroupName: "Interior",
-    active: false
+    groupCode: "2",
+    groupName: "Interior",
+    activeFlag: false
 },
 {
-    GroupCode: "3",
-    GroupName: "Exterior",
-    active: true
+    groupCode: "3",
+    groupName: "Exterior",
+    activeFlag: true
 }
 ]
 function Group({ menuTabValue }) {
@@ -52,10 +52,10 @@ function Group({ menuTabValue }) {
     const handleClick = (rowData) => {
         const list = [...groupData]
         const i  = groupData.findIndex((data)=>{
-            return data.GroupCode === rowData.GroupCode;
+            return data.groupCode === rowData.groupCode;
         })
         
-        list[i]['active'] = rowData.active ? false : true;
+        list[i]['activeFlag'] = rowData.activeFlag ? false : true;
         setGroupData(list);
     };
     return (
@@ -93,12 +93,12 @@ function Group({ menuTabValue }) {
                                         key="1"
                                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                     >
-                                        <TableCell width="20%"> {data.GroupCode}</TableCell>
-                                        <TableCell width="20%">{data.GroupName}</TableCell>
+                                        <TableCell width="20%"> {data.groupCode}</TableCell>
+                                        <TableCell width="20%">{data.groupName}</TableCell>
                                         <TableCell width="20%"><Button variant="contained" color="info" startIcon={<EditIcon />}
                                             onClick={()=>{handleOpen(data)}}>Edit</Button></TableCell>
                                         <TableCell width="20%"><Button variant="contained" fullWidth="false" onClick={() => { handleClick(data) }}
-                                            color={data.active ? 'success' : 'error'}>{data.active ? 'Activate' : 'Deactivate'}
+                                            color={data.activeFlag ? 'success' : 'error'}>{data.activeFlag ? 'Activate' : 'Deactivate'}
                                         </Button>
                                         </TableCell>
                                     </TableRow>)
