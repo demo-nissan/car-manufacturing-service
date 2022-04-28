@@ -35,7 +35,7 @@ export const getZoneActivate = id =>{
 
 export const getZoneData = () =>{
     let data =mockData;
-    console.log("inside action", mockData)
+   
     // axios.get('http://localhost:8080/get/all').then((response) => {
     //     dispatch({
     //          type:GET_ZONE_DATA,

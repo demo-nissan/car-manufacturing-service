@@ -133,7 +133,7 @@ export const mockData={
                                 groupName : "Nissan",
                                 activeFlag: true,
                                 zones: [{
-                                        zoneCode: "2c110",
+                                        zoneCode: "2c20",
                                         zoneName : "Nissan",
                                         activeFlag: true,
                                     }]
@@ -148,20 +148,20 @@ export const mockData={
                             country:"India",
                             language:"ENG",
                             groups: [{
-                                    groupCode: "2c1111",
+                                    groupCode: "2c21",
                                     groupName : "Nissan",
                                     activeFlag: true,
                                     zones: [{
-                                            zoneCode: "2c1",
+                                            zoneCode: "2c21",
                                             zoneName : "Nissan",
                                             activeFlag: true,
                                         }]
                                     },{
-                                    groupCode: "2c12",
+                                    groupCode: "2c22",
                                     groupName : "Nissan",
                                     activeFlag: true,
                                     zones: [{
-                                            zoneCode: "2c112",
+                                            zoneCode: "2c22",
                                             zoneName : "Nissan",
                                             activeFlag: true,
                                         }]
