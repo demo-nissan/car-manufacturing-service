@@ -138,7 +138,7 @@ function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, updat
                         </Select>
                     </FormControl>
                   </div>
-                  <div className={headerMenuValue === '3' || createUpdateStatus ? "zoneGroupDropDown" : "hideCodeValueCss" }>
+                  <div className={headerMenuValue === '1' || headerMenuValue === '2' || createUpdateStatus ? "hideCodeValueCss" : "groupOrZonePlantDropDown" }>
                     <FormControl fullWidth>
                       <InputLabel id="demo-simple-select-label">Group Name</InputLabel>
                         <Select
