@@ -18,14 +18,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getZoneData } from '../../actions/actions';
 
 function Group({ menuTabValue }) {
-    let groupArray =[];
+    let groupData =[];
     const MockData = useSelector(state => state.reducer.cmsReducer.zoneData);
     MockData.forEach(element => {
         element.groups.forEach(data=>{
-            groupArray.push(data);
+            groupData.push(data);
         })
     });
-    const [groupData, setGroupData] = React.useState([...groupArray]);
+    // const [groupData, setGroupData] = React.useState([...groupArray]);
     console.log(groupData)
     const [open, setOpen] = React.useState(false);
     const [page, setPage] = React.useState(0);
@@ -46,13 +46,13 @@ function Group({ menuTabValue }) {
         }
     const handleClose = () => setOpen(false);
     const handleClick = (rowData) => {
-        const list = [...groupData]
-        const i  = groupData.findIndex((data)=>{
-            return data.groupCode === rowData.groupCode;
-        })
+        // const list = [...groupData]
+        // const i  = groupData.findIndex((data)=>{
+        //     return data.groupCode === rowData.groupCode;
+        // })
         
-        list[i]['activeFlag'] = rowData.activeFlag ? false : true;
-        setGroupData(list);
+        // list[i]['activeFlag'] = rowData.activeFlag ? false : true;
+        // setGroupData(list);
     };
     return (
         <div className="Group" data-testid="Group">
@@ -94,7 +94,7 @@ function Group({ menuTabValue }) {
                                         <TableCell width="20%"><Button variant="contained" color="info" startIcon={<EditIcon />}
                                             onClick={()=>{handleOpen(data)}}>Edit</Button></TableCell>
                                         <TableCell width="20%"><Button variant="contained" fullWidth="false" onClick={() => { handleClick(data) }}
-                                            color={data.activeFlag ? 'success' : 'error'}>{data.activeFlag ? 'Activate' : 'Deactivate'}
+                                            color={!data.activeFlag ? 'success' : 'error'}>{!data.activeFlag ? 'Activate' : 'Deactivate'}
                                         </Button>
                                         </TableCell>
                                     </TableRow>)

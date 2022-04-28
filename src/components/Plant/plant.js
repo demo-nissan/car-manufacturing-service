@@ -20,17 +20,14 @@ import './plant.css';
 
 
 function Plant({menuTabValue}) { 
-
+  const dispatch  = useDispatch();  
   const MockData = useSelector(state => state.reducer.cmsReducer.zoneData);
-  console.log(MockData,"--");
   const [open, setOpen] = useState(false);
-  const [stateMockData, setStateMockData]=useState(MockData);
+//   const [stateMockData, setStateMockData]=useState(MockData);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(4);  
   const [editableData, setEditableData]=useState('')
   const [plantIndexValue, setPlantIndexValue]=useState('');
-
-  console.log(stateMockData, "MockData")
 
   
 
@@ -44,14 +41,15 @@ function Plant({menuTabValue}) {
   };
 
   const handleActivateDeactivateButton =( buttonStatus, plantCode, i)=>{
-    const list = [...stateMockData];
-    console.log(list);
-    list[i]['active'] = buttonStatus ? false : true;
-    setStateMockData(list);
-
-    const baseURL = buttonStatus ? 'http://localhost:8080/plants/deactivate/' : 'http://localhost:8080/plants/activate/';
+    // const list = [...stateMockData];
+    // console.log(list);
+    // list[i]['active'] = buttonStatus ? false : true;
+    // setStateMockData(list);
+    
+    const baseURL = !buttonStatus ? 'http://localhost:8080/plants/deactivate' : 'http://localhost:8080/plants/activate';
     axios.put(`${baseURL}/${plantCode}`).then((response) => {
         console.log(response)
+        dispatch(getZoneData());
     });
   }
   
@@ -94,7 +92,7 @@ function Plant({menuTabValue}) {
                              {
                              /* {stateMockData?.length === 0 ? 
                               <TableRow><div className='noRecordFoundDiv'>No Data Found...</div></TableRow> : */
-                             stateMockData && stateMockData
+                              MockData && MockData
                               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                               .map((item, i) => (
                                 <TableRow
@@ -121,7 +119,7 @@ function Plant({menuTabValue}) {
         <TablePagination
             rowsPerPageOptions={[4, 10, 25]}
             component="div"
-            count={stateMockData.length}
+            count={MockData?.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

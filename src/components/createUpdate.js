@@ -34,7 +34,8 @@ function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, updat
   const[groupData, setGroupData]=useState([]);
   const dispatch  = useDispatch();
   let createUpdateStatus=createOrUpdateStatus==='Update' ? true: false;
-  const tabValue=headerMenuValue==='1' ? 'plants': headerMenuValue==='2' ? 'groups': 'zones';
+  const tabValueCreate=headerMenuValue==='1' ? 'plants': headerMenuValue==='2' ? 'group/createGroup': 'zones';
+  const tabValueUpdate=headerMenuValue==='1' ? 'plants': headerMenuValue==='2' ? 'group/editGroup': 'zones';
  
   const MockData = useSelector(state => state.reducer.cmsReducer.zoneData);
  
@@ -74,34 +75,35 @@ function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, updat
       } : headerMenuValue ==='2' ? {
           group_name: editValueName,
           active_flag: true,
-          plant_code:productCodeValue,
+          plant_code:productCodeValue.plantCode,
       } : {
-          zone_name: "ZN2",
+          zone_name: editValueName,
           active_flag: true,
-          plant_code:productCodeValue,
+          plant_code:productCodeValue.plantCode,
           group_code:1,
       }
 
       let updateBodyValue=headerMenuValue ==='1' ? {
             place: editValueName,
-            country: "IND",
+            country: plantCountryName,
             language: "ENG",
         } : headerMenuValue ==='2' ? {
-            group_name: editValueCode,
+            group_name: editValueName,
         } : {
-            zone_name: editValueCode,
+            zone_name: editValueName,
         }
 
       
 
     if(createOrUpdateStatus==='Update'){
-    axios.put(`http://localhost:8080/${tabValue}/${indexValue}`, updateBodyValue)
-      .then(res => {
-        console.log(res);
-        dispatch(getZoneData());
+    axios.put(`http://localhost:8080/${tabValueUpdate}/${editValueCode}`, updateBodyValue)
+      .then(async (res) => {
+        console.log(res,"100 ");
+        const newData = await getZoneData();
+        dispatch(newData);
       });
     }else{
-      axios.post(`http://localhost:8080/${tabValue}`, createBodyValue)
+      axios.post(`http://localhost:8080/${tabValueCreate}`, createBodyValue)
       .then(res => {
         console.log(res);
         dispatch(getZoneData());

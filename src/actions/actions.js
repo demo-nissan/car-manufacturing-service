@@ -37,6 +37,7 @@ export const getZoneData = () =>{
     let data =mockData;
     return function(dispatch){
         axios.get('http://localhost:8080/group/getAll').then((response) => {
+            console.log(response);
             dispatch({
                 type:GET_ZONE_DATA,
                 payload: response.data,
