@@ -5,5 +5,5 @@
     height: 50px;
     bottom: 0;
     overflow: hidden;
-    position: static;
+    position: absolute;
 }

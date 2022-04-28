@@ -57,7 +57,7 @@ function Group({ menuTabValue }) {
     return (
         <div className="Group" data-testid="Group">
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-                <TableContainer component={Paper} >
+                <TableContainer sx={{ maxHeight: 310 }} component={Paper} >
                     <Table sx={{ minWidth: 650 }} aria-label="a dense table">
                         <TableHead>
                             <TableRow>

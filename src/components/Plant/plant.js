@@ -16,20 +16,22 @@ import TablePagination from '@mui/material/TablePagination';
 import CreateUpdate from '../createUpdate';
 import { useDispatch, useSelector } from 'react-redux';
 import { getZoneData } from '../../actions/actions';
+import './plant.css';
 
 
 function Plant({menuTabValue}) { 
   
   const MockData = useSelector(state => state.reducer.cmsReducer.zoneData);
-
  
   const [open, setOpen] = useState(false);
-  const [stateMockData, setStateMockData]=useState(MockData.plants);
+  const [stateMockData, setStateMockData]=useState(MockData?.plants);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(4);  
   const [editableData, setEditableData]=useState('')
   const [plantIndexValue, setPlantIndexValue]=useState('');
   const dispatch  = useDispatch();
+
+  console.log(stateMockData, "MockData")
 
   useEffect(() => {
     dispatch(getZoneData());
@@ -67,7 +69,7 @@ function Plant({menuTabValue}) {
        
   return (
     <div>
-        <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+        <Paper sx={{  width: '100%', overflow: 'hidden' }}>
         <TableContainer sx={{ maxHeight: 310 }}> 
             <Table stickyHeader aria-label="sticky table">
                 <TableHead>
@@ -93,9 +95,11 @@ function Plant({menuTabValue}) {
                             <CreateUpdate createOrUpdateStatus={'Update'} handleClose={handleClose} headerMenuValue={menuTabValue} updateData={editableData} indexValue={plantIndexValue} />
                         </Modal>
                             <TableBody>
-                             {stateMockData && stateMockData
-                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                             .map((item, i) => (
+                             {stateMockData?.length === 0 ? 
+                              <TableRow><div className='noRecordFoundDiv'>No Data Found...</div></TableRow> :
+                             stateMockData
+                              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                              .map((item, i) => (
                                 <TableRow
                                     key="1"
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -106,7 +110,7 @@ function Plant({menuTabValue}) {
                                     <TableCell width="20%">
                                         <Button variant="contained" onClick={()=>handleOpenEdit(item, i)} startIcon={<EditIcon />}>Edit</Button>
                                     </TableCell>
-                                    <TableCell width="20%">
+                                    <TableCell width="30%">
                                         <Button variant="contained" fullWidth="false" onClick={() => { handleActivateDeactivateButton( item.active, item.plantCode, i) }}
                                             color={item.active ? 'success' : 'error'}>{item.active ? 'Activate' : 'Deactivate'}
                                         </Button>  
