@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from "axios";
-import React from "react";
+import {React, useEffect } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -13,22 +13,29 @@ import Modal from '@mui/material/Modal';
 import Backdrop from '@mui/material/Backdrop';
 import EditIcon from '@mui/icons-material/Edit';
 import TablePagination from '@mui/material/TablePagination';
-import { mockData } from '../mockData/mockData';
 import CreateUpdate from '../createUpdate';
+import { useDispatch, useSelector } from 'react-redux';
+import { getZoneData } from '../../actions/actions';
+import {mockData} from '../mockData/mockData';
 
 function Plant({menuTabValue}) { 
+  
+  const MockData = useSelector(state => state.reducer.cmsReducer.zoneData);
+  console.log(MockData, "MockData")
+ 
   const [open, setOpen] = useState(false);
-  const [stateMockData, setStateMockData]=useState(mockData.Plant);
+  const [stateMockData, setStateMockData]=useState(mockData?.plants);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(4);  
   const [editableData, setEditableData]=useState('')
   const [plantIndexValue, setPlantIndexValue]=useState('');
+  const dispatch  = useDispatch();
 
-  React.useEffect(() => {
-    axios.get('http://localhost:8080/get/all').then((response) => {
-        setStateMockData(response.data);
-    });
+  useEffect(() => {
+    console.log("useeffect")
+    dispatch(getZoneData());
   }, []);
+  
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -87,7 +94,7 @@ function Plant({menuTabValue}) {
                             <CreateUpdate createOrUpdateStatus={'Update'} handleClose={handleClose} headerMenuValue={menuTabValue} updateData={editableData} indexValue={plantIndexValue} />
                         </Modal>
                             <TableBody>
-                             {stateMockData
+                             {stateMockData && stateMockData
                              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                              .map((item, i) => (
                                 <TableRow
@@ -106,7 +113,8 @@ function Plant({menuTabValue}) {
                                         </Button>  
                                     </TableCell>
                                 </TableRow>
-                              ))}  
+                              )) 
+                             } 
                             </TableBody>
                         </Table>
         </TableContainer>

@@ -1,5 +1,5 @@
 export const mockData={
-    Plant :  [
+    plants :  [
         {
         plantCode: "2c1",
         plantName : "Nissan",
@@ -7,11 +7,11 @@ export const mockData={
         place: "TVM",
         country:"India",
         language:"ENG",
-            Group: [{
+        groups: [{
                 groupCode: "2c1",
                 groupName : "Nissan",
                 activeFlag: true,
-                    Zone: [{
+                zones: [{
                         zoneCode: "2c11",
                         zoneName : "Nissan",
                     }]
@@ -19,7 +19,7 @@ export const mockData={
                 groupCode: "2c2",
                 groupName : "Nissan",
                 activeFlag: true,
-                    Zone: [{
+                zones: [{
                         zoneCode: "2c12",
                         zoneName : "Nissan",
                     }]
@@ -33,11 +33,11 @@ export const mockData={
             place: "TVM",
             country:"India",
             language:"ENG",
-                Group: [{
+            groups: [{
                     groupCode: "2c3",
                     groupName : "Nissan",
                     activeFlag: true,
-                        Zone: [{
+                    zones: [{
                             zoneCode: "2c13",
                             zoneName : "Nissan",
                         }]
@@ -45,7 +45,7 @@ export const mockData={
                     groupCode: "2c4",
                     groupName : "Nissan",
                     activeFlag: true,
-                        Zone: [{
+                    zones: [{
                             zoneCode: "2c14",
                             zoneName : "Nissan",
                         }]
@@ -59,11 +59,11 @@ export const mockData={
                 place: "TVM",
                 country:"India",
                 language:"ENG",
-                    Group: [{
+                groups: [{
                         groupCode: "2c5",
                         groupName : "Nissan",
                         activeFlag: true,
-                            Zone: [{
+                        zones: [{
                                 zoneCode: "2c15",
                                 zoneName : "Nissan",
                             }]
@@ -71,7 +71,7 @@ export const mockData={
                         groupCode: "2c6",
                         groupName : "Nissan",
                         activeFlag: true,
-                            Zone: [{
+                        zones: [{
                                 zoneCode: "2c16",
                                 zoneName : "Nissan",
                             }]
@@ -85,11 +85,11 @@ export const mockData={
                     place: "TVM",
                     country:"India",
                     language:"ENG",
-                        Group: [{
+                    groups: [{
                             groupCode: "2c7",
                             groupName : "Nissan",
                             activeFlag: true,
-                                Zone: [{
+                            zones: [{
                                     zoneCode: "2c17",
                                     zoneName : "Nissan",
                                 }]
@@ -97,7 +97,7 @@ export const mockData={
                             groupCode: "2c8",
                             groupName : "Nissan",
                             activeFlag: true,
-                                Zone: [{
+                            zones: [{
                                     zoneCode: "2c18",
                                     zoneName : "Nissan",
                                 }]
@@ -111,11 +111,11 @@ export const mockData={
                         place: "TVM",
                         country:"India",
                         language:"ENG",
-                            Group: [{
+                        groups: [{
                                 groupCode: "2c9",
                                 groupName : "Nissan",
                                 activeFlag: true,
-                                    Zone: [{
+                                zones: [{
                                         zoneCode: "2c19",
                                         zoneName : "Nissan",
                                     }]
@@ -123,7 +123,7 @@ export const mockData={
                                 groupCode: "2c10",
                                 groupName : "Nissan",
                                 activeFlag: true,
-                                    Zone: [{
+                                zones: [{
                                         zoneCode: "2c110",
                                         zoneName : "Nissan",
                                     }]
@@ -137,11 +137,11 @@ export const mockData={
                             place: "TVM",
                             country:"India",
                             language:"ENG",
-                                Group: [{
+                            groups: [{
                                     groupCode: "2c1111",
                                     groupName : "Nissan",
                                     activeFlag: true,
-                                        Zone: [{
+                                    zones: [{
                                             zoneCode: "2c1",
                                             zoneName : "Nissan",
                                         }]
@@ -149,7 +149,7 @@ export const mockData={
                                     groupCode: "2c12",
                                     groupName : "Nissan",
                                     activeFlag: true,
-                                        Zone: [{
+                                    zones: [{
                                             zoneCode: "2c112",
                                             zoneName : "Nissan",
                                         }]

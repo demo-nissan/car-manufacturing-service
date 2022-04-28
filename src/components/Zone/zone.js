@@ -32,7 +32,7 @@ function Zone({menuTabValue}) {
 
     function updateActivate(data,i){
 
-        data.Plant[i].status = "InActive";
+        data.plants[i].status = "InActive";
         var newState = !zoneActivate;
         dispatch(setZoneActivate(newState));
         //dispatch(setZoneData(data))
@@ -76,15 +76,15 @@ function Zone({menuTabValue}) {
                         </Modal>
 
                             <TableBody>
-                             {zoneData && zoneData.Plant.map((plant, i) => (
-                                    plant.Group.map((group, j) => (
-                                            group.Zone.map((item, k) => (
+                             {zoneData && zoneData.plants.map((plant, i) => (
+                                    plant.groups.map((group, j) => (
+                                            group.zones.map((item, k) => (
                                                 <TableRow
                                                     key={k}
                                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                                 >
-                                                    <TableCell >{item.ZoneCode}</TableCell>
-                                                    <TableCell >{item.ZoneName}</TableCell>
+                                                    <TableCell >{item.zoneCode}</TableCell>
+                                                    <TableCell >{item.zoneName}</TableCell>
                                                     <TableCell >{plant.country}</TableCell>
                                                     <TableCell >
                                                         <Button variant="contained" color="info" startIcon={<EditIcon />}

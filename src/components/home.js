@@ -15,12 +15,22 @@ import Group from './Group/Group'
 import Modal from '@mui/material/Modal';
 import Backdrop from '@mui/material/Backdrop';
 import CreateUpdate from './createUpdate';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getZoneData } from '../actions/actions';
 import './home.css';
 
 function Home() {
   const [value, setValue] = useState('1');
   const [open, setOpen] = useState(false);
+  const dispatch  = useDispatch();
 
+  // React.useEffect(() => {
+  //   console.log("useeffect inside home")
+  //   dispatch(getZoneData());
+  // } );
+  
+  //  dispatch(getZoneData());
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
