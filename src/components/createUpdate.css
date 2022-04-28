@@ -25,4 +25,9 @@
 }
 .groupOrZonePlantDropDown{
     padding-top: 15px;
+    width: 50%;
+}
+.zoneGroupDropDown{
+    padding-top: 15px;
+    width: 50%;
 }
