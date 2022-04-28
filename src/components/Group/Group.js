@@ -20,7 +20,7 @@ import { getZoneData } from '../../actions/actions';
 function Group({ menuTabValue }) {
     let groupArray =[];
     const MockData = useSelector(state => state.reducer.cmsReducer.zoneData);
-    MockData.plants.forEach(element => {
+    MockData.forEach(element => {
         element.groups.forEach(data=>{
             groupArray.push(data);
         })

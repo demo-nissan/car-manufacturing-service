@@ -20,22 +20,18 @@ import './plant.css';
 
 
 function Plant({menuTabValue}) { 
-  
+
   const MockData = useSelector(state => state.reducer.cmsReducer.zoneData);
- 
+  console.log(MockData,"--");
   const [open, setOpen] = useState(false);
-  const [stateMockData, setStateMockData]=useState(MockData?.plants);
+  const [stateMockData, setStateMockData]=useState(MockData);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(4);  
   const [editableData, setEditableData]=useState('')
   const [plantIndexValue, setPlantIndexValue]=useState('');
-  const dispatch  = useDispatch();
 
   console.log(stateMockData, "MockData")
 
-  useEffect(() => {
-    dispatch(getZoneData());
-  }, []);
   
 
   const handleChangePage = (event, newPage) => {
@@ -95,9 +91,10 @@ function Plant({menuTabValue}) {
                             <CreateUpdate createOrUpdateStatus={'Update'} handleClose={handleClose} headerMenuValue={menuTabValue} updateData={editableData} indexValue={plantIndexValue} />
                         </Modal>
                             <TableBody>
-                             {stateMockData?.length === 0 ? 
-                              <TableRow><div className='noRecordFoundDiv'>No Data Found...</div></TableRow> :
-                             stateMockData
+                             {
+                             /* {stateMockData?.length === 0 ? 
+                              <TableRow><div className='noRecordFoundDiv'>No Data Found...</div></TableRow> : */
+                             stateMockData && stateMockData
                               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                               .map((item, i) => (
                                 <TableRow

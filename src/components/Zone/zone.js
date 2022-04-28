@@ -23,7 +23,7 @@ function Zone({ menuTabValue }) {
     const zoneActivate = useSelector(state => state.reducer.cmsReducer.zoneActivate);
     const zoneData = useSelector(state => state.reducer.cmsReducer.zoneData);
 
-    zoneData?.plants?.forEach(element => {
+    zoneData?.forEach(element => {
         element?.groups?.forEach(data=>{
             data?.zones?.forEach(item=>{     
                 zoneArray.push(item);
