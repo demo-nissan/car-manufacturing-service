@@ -3,6 +3,7 @@ GET_ZONE_ACTIVATE,
 SET_ZONE_ACTIVATE,
 SET_ZONE_DATA,
 GET_ZONE_DATA} from './constants';
+import axios from 'axios';
 
 
 export const getZoneActivate = id =>{
@@ -12,7 +13,28 @@ export const getZoneActivate = id =>{
     }
 }
 
+
+// export const getZoneDataSample = id =>{
+
+//     return function(dispatch){
+//         axios.get("https://reqres.in/api/users/").then(response => {
+
+//         console.log("%$%$%$$%$%$%%%%%%%%%%%%%%%%@@@2222");
+//         console.log(response);
+//         console.log("%$%$%$$%$%$%%%%%%%%%%%%%%%%@@@2222");
+//             dispatch({
+//                 type:GET_ZONE_DATA,
+//                 payload:"data",
+//             })
+//         })
+//         .catch(errors =>{
+            
+//         })
+//     }
+// }
+
 export const getZoneData = id =>{
+
     let data = {
         Plant :  [
             {
