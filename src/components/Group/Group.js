@@ -35,6 +35,7 @@ function Group({ menuTabValue }) {
     const [open, setOpen] = React.useState(false);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [editableData, setEditableData]=React.useState('');
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
@@ -43,7 +44,10 @@ function Group({ menuTabValue }) {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
-    const handleOpen = () => setOpen(true);
+    const handleOpen = (itemValue) => {
+        setEditableData(itemValue);
+        setOpen(true); 
+        }
     const handleClose = () => setOpen(false);
     const handleClick = (rowData) => {
         const list = [...groupData]
@@ -78,7 +82,7 @@ function Group({ menuTabValue }) {
                                 timeout: 500,
                             }}
                         >
-                            <CreateUpdate createOrUpdateStatus={'Update'} handleClose={handleClose} headerMenuValue={menuTabValue} />
+                            <CreateUpdate createOrUpdateStatus={'Update'} handleClose={handleClose} headerMenuValue={menuTabValue} updateData={editableData} />
                         </Modal>
                         <TableBody>
                             {
@@ -92,7 +96,7 @@ function Group({ menuTabValue }) {
                                         <TableCell width="20%"> {data.GroupCode}</TableCell>
                                         <TableCell width="20%">{data.GroupName}</TableCell>
                                         <TableCell width="20%"><Button variant="contained" color="info" startIcon={<EditIcon />}
-                                            onClick={handleOpen}>Edit</Button></TableCell>
+                                            onClick={()=>{handleOpen(data)}}>Edit</Button></TableCell>
                                         <TableCell width="20%"><Button variant="contained" fullWidth="false" onClick={() => { handleClick(data) }}
                                             color={data.active ? 'success' : 'error'}>{data.active ? 'Activate' : 'Deactivate'}
                                         </Button>
