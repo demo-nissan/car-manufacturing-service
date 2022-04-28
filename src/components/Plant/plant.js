@@ -34,7 +34,6 @@ function Plant({menuTabValue}) {
   console.log(stateMockData, "MockData")
 
   useEffect(() => {
-    console.log("useeffect")
     dispatch(getZoneData());
   }, []);
   
