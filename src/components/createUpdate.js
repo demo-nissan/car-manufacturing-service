@@ -20,8 +20,8 @@ const style = {
 
 function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, updateData, indexValue}) {
 
-  const[editValueCode, setEditValueCode]=useState(headerMenuValue=== '1' ? updateData.plantCode : '');
-  const[editValueName, setEditValueName]=useState(headerMenuValue=== '1' ? updateData.plantName : '');
+  const[editValueCode, setEditValueCode]=useState(headerMenuValue=== '1' ? updateData.plantCode : headerMenuValue=== '2'? updateData.groupCode : updateData.zone_code);
+  const[editValueName, setEditValueName]=useState(headerMenuValue=== '1' ? updateData.plantName : headerMenuValue=== '2'?updateData.groupName : updateData.zone_name);
  
   let createUpdateStatus=createOrUpdateStatus==='Update' ? true: false;
   const tabValue=headerMenuValue==='1' ? 'plants': headerMenuValue==='2' ? 'groups': 'zones';
