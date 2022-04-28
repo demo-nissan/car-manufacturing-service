@@ -27,8 +27,8 @@ function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, updat
 
   const[productCodeValue, setProductCodeValue]=useState(0);
   const[groupCodeValue, setGroupCodeValue]=useState(0)
-  const[editValueCode, setEditValueCode]=useState(headerMenuValue=== '1' ? updateData.plantCode : headerMenuValue=== '2'? updateData.groupCode : updateData.zone_code);
-  const[editValueName, setEditValueName]=useState(headerMenuValue=== '1' ? updateData.plantName : headerMenuValue=== '2'?updateData.groupName : updateData.zone_name);
+  const[editValueCode, setEditValueCode]=useState(headerMenuValue=== '1' ? updateData.plantCode : headerMenuValue=== '2'? updateData.groupCode : updateData.zoneCode);
+  const[editValueName, setEditValueName]=useState(headerMenuValue=== '1' ? updateData.plantName : headerMenuValue=== '2'?updateData.groupName : updateData.zoneName);
   const[plantCountryName, setPlantCountryName]=useState(updateData?.country)
   const[groupData, setGroupData]=useState([]);
   let createUpdateStatus=createOrUpdateStatus==='Update' ? true: false;
