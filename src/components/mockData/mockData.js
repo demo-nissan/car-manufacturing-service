@@ -1,23 +1,27 @@
 export const mockData={
-    Plant :  [
+    plants :  [
         {
         plantCode: "2c1",
         plantName : "Nissan",
+        activeFlag: true,
+        place: "TVM",
         country:"India",
-        active: true,
-            Group: [{
-                GroupCode: "2c1",
-                GroupName : "Nissan",
-                    Zone: [{
-                    ZoneCode: "2c1",
-                    ZoneName : "Nissan",
+        language:"ENG",
+        groups: [{
+                groupCode: "2c1",
+                groupName : "Nissan",
+                activeFlag: true,
+                zones: [{
+                        zoneCode: "2c11",
+                        zoneName : "Nissan",
                     }]
                 },{
-                GroupCode: "2c2",
-                GroupName : "Nissan",
-                    Zone: [{
-                        ZoneCode: "2c1",
-                        ZoneName : "Nissan",
+                groupCode: "2c2",
+                groupName : "Nissan",
+                activeFlag: true,
+                zones: [{
+                        zoneCode: "2c12",
+                        zoneName : "Nissan",
                     }]
                 },]
     
@@ -25,21 +29,25 @@ export const mockData={
         {
             plantCode: "2c2",
             plantName : "Nissan",
+            activeFlag: true,
+            place: "TVM",
             country:"India",
-            active: false,
-                Group: [{
-                    GroupCode: "2c3",
-                    GroupName : "Nissan",
-                        Zone: [{
-                        ZoneCode: "2c1",
-                        ZoneName : "Nissan",
+            language:"ENG",
+            groups: [{
+                    groupCode: "2c3",
+                    groupName : "Nissan",
+                    activeFlag: true,
+                    zones: [{
+                            zoneCode: "2c13",
+                            zoneName : "Nissan",
                         }]
                     },{
-                    GroupCode: "2c4",
-                    GroupName : "Nissan",
-                        Zone: [{
-                            ZoneCode: "2c1",
-                            ZoneName : "Nissan",
+                    groupCode: "2c4",
+                    groupName : "Nissan",
+                    activeFlag: true,
+                    zones: [{
+                            zoneCode: "2c14",
+                            zoneName : "Nissan",
                         }]
                     },]
         
@@ -47,21 +55,25 @@ export const mockData={
             {
                 plantCode: "2c3",
                 plantName : "Nissan",
+                activeFlag: true,
+                place: "TVM",
                 country:"India",
-                active: true,
-                    Group: [{
-                        GroupCode: "2c5",
-                        GroupName : "Nissan",
-                            Zone: [{
-                            ZoneCode: "2c1",
-                            ZoneName : "Nissan",
+                language:"ENG",
+                groups: [{
+                        groupCode: "2c5",
+                        groupName : "Nissan",
+                        activeFlag: true,
+                        zones: [{
+                                zoneCode: "2c15",
+                                zoneName : "Nissan",
                             }]
                         },{
-                        GroupCode: "2c6",
-                        GroupName : "Nissan",
-                            Zone: [{
-                                ZoneCode: "2c1",
-                                ZoneName : "Nissan",
+                        groupCode: "2c6",
+                        groupName : "Nissan",
+                        activeFlag: true,
+                        zones: [{
+                                zoneCode: "2c16",
+                                zoneName : "Nissan",
                             }]
                         },]
             
@@ -69,21 +81,25 @@ export const mockData={
                 {
                     plantCode: "2c4",
                     plantName : "Nissan",
+                    activeFlag: true,
+                    place: "TVM",
                     country:"India",
-                    active: false,
-                        Group: [{
-                            GroupCode: "2c7",
-                            GroupName : "Nissan",
-                                Zone: [{
-                                ZoneCode: "2c1",
-                                ZoneName : "Nissan",
+                    language:"ENG",
+                    groups: [{
+                            groupCode: "2c7",
+                            groupName : "Nissan",
+                            activeFlag: true,
+                            zones: [{
+                                    zoneCode: "2c17",
+                                    zoneName : "Nissan",
                                 }]
                             },{
-                            GroupCode: "2c8",
-                            GroupName : "Nissan",
-                                Zone: [{
-                                    ZoneCode: "2c1",
-                                    ZoneName : "Nissan",
+                            groupCode: "2c8",
+                            groupName : "Nissan",
+                            activeFlag: true,
+                            zones: [{
+                                    zoneCode: "2c18",
+                                    zoneName : "Nissan",
                                 }]
                             },]
                 
@@ -91,43 +107,51 @@ export const mockData={
                     {
                         plantCode: "2c5",
                         plantName : "Nissan",
+                        activeFlag: true,
+                        place: "TVM",
                         country:"India",
-                        active: false,
-                            Group: [{
-                                GroupCode: "2c9",
-                                GroupName : "Nissan",
-                                    Zone: [{
-                                    ZoneCode: "2c1",
-                                    ZoneName : "Nissan",
+                        language:"ENG",
+                        groups: [{
+                                groupCode: "2c9",
+                                groupName : "Nissan",
+                                activeFlag: true,
+                                zones: [{
+                                        zoneCode: "2c19",
+                                        zoneName : "Nissan",
                                     }]
                                 },{
-                                GroupCode: "2c10",
-                                GroupName : "Nissan",
-                                    Zone: [{
-                                        ZoneCode: "2c1",
-                                        ZoneName : "Nissan",
+                                groupCode: "2c10",
+                                groupName : "Nissan",
+                                activeFlag: true,
+                                zones: [{
+                                        zoneCode: "2c110",
+                                        zoneName : "Nissan",
                                     }]
                                 },]
                     
                         },
                         {
-                            plantCode: "2c6",
+                            plantCode: "2c6S",
                             plantName : "Nissan",
+                            activeFlag: true,
+                            place: "TVM",
                             country:"India",
-                            active: false,
-                                Group: [{
-                                    GroupCode: "2c11",
-                                    GroupName : "Nissan",
-                                        Zone: [{
-                                        ZoneCode: "2c1",
-                                        ZoneName : "Nissan",
+                            language:"ENG",
+                            groups: [{
+                                    groupCode: "2c1111",
+                                    groupName : "Nissan",
+                                    activeFlag: true,
+                                    zones: [{
+                                            zoneCode: "2c1",
+                                            zoneName : "Nissan",
                                         }]
                                     },{
-                                    GroupCode: "2c12",
-                                    GroupName : "Nissan",
-                                        Zone: [{
-                                            ZoneCode: "2c1",
-                                            ZoneName : "Nissan",
+                                    groupCode: "2c12",
+                                    groupName : "Nissan",
+                                    activeFlag: true,
+                                    zones: [{
+                                            zoneCode: "2c112",
+                                            zoneName : "Nissan",
                                         }]
                                     },]
                         

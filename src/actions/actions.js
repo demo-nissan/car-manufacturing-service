@@ -4,7 +4,7 @@ SET_ZONE_ACTIVATE,
 SET_ZONE_DATA,
 GET_ZONE_DATA} from './constants';
 import axios from 'axios';
-
+import { mockData } from '../components/mockData/mockData';
 
 export const getZoneActivate = id =>{
     return {
@@ -33,56 +33,18 @@ export const getZoneActivate = id =>{
 //     }
 // }
 
-export const getZoneData = id =>{
-
-    let data = {
-        Plant :  [
-            {
-            plantCode: "2c1",
-            plantName : "Nissan",
-            country:"India",
-            status:"active",
-                Group: [{
-                    GroupCode: "2c1",
-                    GroupName : "Nissan",
-                        Zone: [{
-                        ZoneCode: "NSNKOCHI",
-                        ZoneName : "Nissan Kochi",
-                        }]
-                    },{
-                    GroupCode: "2c1",
-                    GroupName : "Nissan",
-                        Zone: [{
-                            ZoneCode: "NSNTVM",
-                            ZoneName : "Nissan Tvm",
-                        }]
-                    },]
-        
-            },
-            {
-                plantCode: "2c2",
-                plantName : "Nissan",
-                country:"India",
-                status:"deactive",
-                    Group: [{
-                        GroupCode: "2c1",
-                        GroupName : "Nissan",
-                            Zone: [{
-                            ZoneCode: "NSNBAN",
-                            ZoneName : "Nissan BAN",
-                            }]
-                        },{
-                        GroupCode: "2c1",
-                        GroupName : "Nissan",
-                            Zone: [{
-                                ZoneCode: "NSNCHN",
-                                ZoneName : "Nissan Chennai",
-                            }]
-                        },]
-            
-                },
-            ]
-        };
+export const getZoneData = () =>{
+    let data =mockData;
+    console.log("inside action", mockData)
+    // axios.get('http://localhost:8080/get/all').then((response) => {
+    //     dispatch({
+    //          type:GET_ZONE_DATA,
+    //          payload: response.data,
+    //      })
+    // })
+    // .catch(errors =>{
+    //     console.log(errors)    
+    // });
     return {
         type:GET_ZONE_DATA,
         payload:data,

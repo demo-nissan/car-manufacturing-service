@@ -3,6 +3,7 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import CloseIcon from '@mui/icons-material/Close';
+import Select from '@mui/material/Select';
 import './createUpdate.css'
 import { useState } from "react";
 
@@ -22,7 +23,7 @@ function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, updat
 
   const[editValueCode, setEditValueCode]=useState(headerMenuValue=== '1' ? updateData.plantCode : headerMenuValue=== '2'? updateData.groupCode : updateData.zone_code);
   const[editValueName, setEditValueName]=useState(headerMenuValue=== '1' ? updateData.plantName : headerMenuValue=== '2'?updateData.groupName : updateData.zone_name);
- 
+  const[plantCountryName, setPlantCountryName]=useState(updateData?.country)
   let createUpdateStatus=createOrUpdateStatus==='Update' ? true: false;
   const tabValue=headerMenuValue==='1' ? 'plants': headerMenuValue==='2' ? 'groups': 'zones';
 
@@ -32,6 +33,10 @@ function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, updat
 
   const handleChangeEditValueName=(event)=>{
     setEditValueName(event.target.value)
+  }
+
+  const handleChangePlantCountryValue=(event)=>{
+    setPlantCountryName(event.target.value);
   }
 
   const handleSubmit = (event) => {
@@ -76,10 +81,22 @@ function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, updat
               <span className='closeIcon'>  <CloseIcon onClick={handleClose}/></span>
               <div className="createMainLabel"> {createOrUpdateStatus}<span>{' '}</span>{(headerMenuValue === '1' && (<>Plant</>)) || (headerMenuValue === '2' && (<>Group</>))  || (headerMenuValue === '3' && (<>Zone</>))}</div>
               <div>
-                  <div className='groupCodeTextBox'>
+                  <div className={createUpdateStatus? 'groupCodeTextBox' : 'hideCodeValueCss'} >
                       <TextField id="outlined-basic" disabled={createUpdateStatus} value={editValueCode} onChange={handleChangeEditValueCode} label={(headerMenuValue === '1' && (<>Plant Code</>)) || (headerMenuValue === '2' && (<>Group Code</>))  || (headerMenuValue === '3' && (<>Zone Code</>))} variant="outlined" />
                   </div>
-                  <div className='GroupNameTextbox'>
+                  <div className={headerMenuValue === '1' ? "plantCountryTextBox" : "hideCodeValueCss" }  >
+                      <TextField id="outlined-basic" value={plantCountryName}  onChange={handleChangePlantCountryValue} label="Plant Country" variant="outlined" />
+                  </div>
+                  <div className={headerMenuValue === '1' ? "hideCodeValueCss" : "groupOrZonePlantDropDown" }>
+                      <Select
+                          labelId="demo-simple-select-label"
+                          id="demo-simple-select"
+                          
+                          label="Age"
+                          // onChange={handleChange}
+                        />
+                  </div>
+                  <div className='groupNameTextbox'>
                       <TextField id="outlined-basic" value={editValueName} onChange={handleChangeEditValueName}  label={(headerMenuValue === '1' && (<>Plant Name</>)) || (headerMenuValue === '2' && (<>Group Name</>))  || (headerMenuValue === '3' && (<>Zone Name</>))}variant="outlined" />
                   </div>
                   <div className='submitButton'>

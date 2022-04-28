@@ -14,6 +14,15 @@
 .groupCodeTextBox{
     padding-top: 15px;
 }
-.GroupNameTextbox{
+.groupNameTextbox{
+    padding-top: 15px;
+}
+.hideCodeValueCss{
+    display: none;
+}
+.plantCountryTextBox{
+    padding-top: 15px;
+}
+.groupOrZonePlantDropDown{
     padding-top: 15px;
 }
