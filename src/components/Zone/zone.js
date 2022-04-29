@@ -16,14 +16,15 @@ import { useEffect } from 'react';
 import Modal from '@mui/material/Modal';
 import Backdrop from '@mui/material/Backdrop';
 import CreateUpdate from '../createUpdate';
+import axios from "axios";
 
 function Zone({ menuTabValue }) {
-
+    const dispatch  = useDispatch(); 
     let zoneArray =[];
     const zoneActivate = useSelector(state => state.reducer.cmsReducer.zoneActivate);
     const zoneData = useSelector(state => state.reducer.cmsReducer.zoneData);
 
-    zoneData?.plants?.forEach(element => {
+    zoneData?.forEach(element => {
         element?.groups?.forEach(data=>{
             data?.zones?.forEach(item=>{     
                 zoneArray.push(item);
@@ -39,7 +40,6 @@ function Zone({ menuTabValue }) {
         setOpen(true);
     }
     const handleClose = () => setOpen(false);
-    const dispatch = useDispatch();
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -50,16 +50,13 @@ function Zone({ menuTabValue }) {
         setPage(0);
     };
 
-    useEffect(() => {
-        dispatch(getZoneData());
-    }, []);
 
-    function updateActivate(data, i) {
-
-        data.plants[i].status = "InActive";
-        var newState = !zoneActivate;
-        dispatch(setZoneActivate(newState));
-        //dispatch(setZoneData(data))
+    function updateActivate(rowData) {
+        const baseURL = rowData.activeFlag ? 'http://localhost:8080/zones/deactivate' : 'http://localhost:8080/zones/activate';
+        axios.put(`${baseURL}/${rowData.zoneCode}`).then((response) => {
+            console.log(response)
+            dispatch(getZoneData());
+        });
 
     }
 
@@ -117,8 +114,8 @@ function Zone({ menuTabValue }) {
                                         </TableCell>
                                         <TableCell width="30%">
                                             <ThemeProvider theme={theme}>
-                                                <Button variant="contained" fullWidth="false" onClick={() => { updateActivate(zoneData, i) }}
-                                                    color={zoneActivate ? 'success' : 'error'}>{zoneActivate ? 'Activate' : 'Deactivate'}
+                                                <Button variant="contained" fullWidth="false" onClick={() => { updateActivate(item) }}
+                                                    color={!item.activeFlag ? 'success' : 'error'}>{!item.activeFlag ? 'Activate' : 'Deactivate'}
                                                 </Button>
                                             </ThemeProvider>
                                         </TableCell>

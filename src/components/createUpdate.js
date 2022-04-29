@@ -8,6 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import InputLabel from '@mui/material/InputLabel';
 import FormControl from '@mui/material/FormControl';
 import { useDispatch, useSelector } from 'react-redux';
+import { getZoneData } from '../actions/actions';
 import './createUpdate.css'
 import { useState } from "react";
 
@@ -22,7 +23,17 @@ const style = {
     boxShadow: 24,
     p: 4,
   };
-
+/**
+ * Common component for edit and update operations
+ * @param {*} param0 flag to check whether create or update action,
+ * close operation handling method,
+ * header value(Plant,Group and Zone),
+ * editable data if the action is update,
+ * index value of the row
+ * @returns Create/Update Pop Up component
+ * @author JOJO Joseph
+ * @author Mijoy M J
+ */
 function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, updateData, indexValue}) {
 
   const[productCodeValue, setProductCodeValue]=useState(0);
@@ -31,13 +42,14 @@ function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, updat
   const[editValueName, setEditValueName]=useState(headerMenuValue=== '1' ? updateData.plantName : headerMenuValue=== '2'?updateData.groupName : updateData.zoneName);
   const[plantCountryName, setPlantCountryName]=useState(updateData?.country)
   const[groupData, setGroupData]=useState([]);
+  const dispatch  = useDispatch();
   let createUpdateStatus=createOrUpdateStatus==='Update' ? true: false;
-  const tabValue=headerMenuValue==='1' ? 'plants': headerMenuValue==='2' ? 'groups': 'zones';
+  const tabValueCreate=headerMenuValue==='1' ? 'plants': headerMenuValue==='2' ? 'group/createGroup': 'zones';
+  const tabValueUpdate=headerMenuValue==='1' ? 'plants': headerMenuValue==='2' ? 'group/editGroup': 'zones';
  
   const MockData = useSelector(state => state.reducer.cmsReducer.zoneData);
  
 
-  console.log(MockData.plants,"MockData")
   const handleChangePlantCodeValue=(event)=>{
     setProductCodeValue(event.target.value);
     setGroupData(event.target.value.groups);
@@ -65,43 +77,46 @@ function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, updat
     event.preventDefault();
 
     let createBodyValue= headerMenuValue ==='1' ? {
-          plant_name: editValueCode,
-          place: editValueName,
-          country: "IND",
+          plant_name: editValueName,
+          country: plantCountryName,
+          place:"TVM",
           language: "ENG",
           active_flag: true
       } : headerMenuValue ==='2' ? {
           group_name: editValueName,
           active_flag: true,
-          plant_code:productCodeValue,
+          plant_code:productCodeValue.plantCode,
       } : {
-          zone_name: "ZN2",
+          zone_name: editValueName,
           active_flag: true,
-          plant_code:productCodeValue,
+          plant_code:productCodeValue.plantCode,
           group_code:1,
       }
 
       let updateBodyValue=headerMenuValue ==='1' ? {
             place: editValueName,
-            country: "IND",
+            country: plantCountryName,
             language: "ENG",
         } : headerMenuValue ==='2' ? {
-            group_name: editValueCode,
+            group_name: editValueName,
         } : {
-            zone_name: editValueCode,
+            zone_name: editValueName,
         }
 
       
 
     if(createOrUpdateStatus==='Update'){
-    axios.put(`http://localhost:8080/${tabValue}/${indexValue}`, updateBodyValue)
-      .then(res => {
-        console.log(res);
+    axios.put(`http://localhost:8080/${tabValueUpdate}/${editValueCode}`, updateBodyValue)
+      .then(async (res) => {
+        console.log(res,"100 ");
+        const newData = await getZoneData();
+        dispatch(newData);
       });
     }else{
-      axios.post(`http://localhost:8080/${tabValue}`, createBodyValue)
+      axios.post(`http://localhost:8080/${tabValueCreate}`, createBodyValue)
       .then(res => {
         console.log(res);
+        dispatch(getZoneData());
       });
     }
     handleClose();
@@ -132,7 +147,7 @@ function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, updat
                             onChange={handleChangePlantCodeValue}
                         >
                           <MenuItem value= '0' disabled>Select..</MenuItem>
-                          {MockData.plants.map((data) =>(
+                          {MockData.map((data) =>(
                               <MenuItem value={data}>{data.plantName}</MenuItem>
                           ))} 
                         </Select>

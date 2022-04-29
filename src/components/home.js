@@ -19,7 +19,10 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getZoneData } from '../actions/actions';
 import './home.css';
-
+/**
+ * Common component or home component which holds the heading and create action button 
+ * @returns home component
+ */
 function Home() {
   const [value, setValue] = useState('1');
   const [open, setOpen] = useState(false);
