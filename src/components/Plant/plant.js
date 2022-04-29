@@ -86,9 +86,7 @@ function Plant({menuTabValue}) {
                         </Modal>
                             <TableBody>
                              {
-                             /* {stateMockData?.length === 0 ? 
-                              <TableRow><div className='noRecordFoundDiv'>No Data Found...</div></TableRow> : */
-                              [].concat(MockData)
+                              MockData&&[].concat(MockData)
                               .sort((a, b) => a.plantCode > b.plantCode ? 1 : -1)
                               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                               .map((item, i) => (

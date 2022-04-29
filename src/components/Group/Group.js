@@ -104,7 +104,8 @@ function Group({ menuTabValue }) {
                         </Modal>
                         <TableBody>
                             {
-                                groupData
+                                [].concat(groupData)
+                                .sort((a, b) => a.groupCode > b.groupCode ? 1 : -1)
                                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                                 .map((data, i) => {
                                     return (<TableRow
