@@ -147,7 +147,7 @@ function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, updat
                             onChange={handleChangePlantCodeValue}
                         >
                           <MenuItem value= '0' disabled>Select..</MenuItem>
-                          {MockData.map((data) =>(
+                          {MockData?.map((data) =>(
                               <MenuItem value={data}>{data.plantName}</MenuItem>
                           ))} 
                         </Select>
@@ -164,7 +164,7 @@ function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, updat
                             onChange={handleChangeGroupCodeValue}
                         >
                           <MenuItem value= '0' disabled>Select..</MenuItem>
-                          {groupData.map((data) =>(
+                          {groupData?.map((data) =>(
                               <MenuItem value={data.groupCode}>{data.groupName}</MenuItem>
                           ))} 
                         </Select>
