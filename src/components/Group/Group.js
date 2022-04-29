@@ -17,36 +17,58 @@ import TablePagination from '@mui/material/TablePagination';
 import { useDispatch, useSelector } from 'react-redux';
 import { getZoneData } from '../../actions/actions';
 import axios from "axios";
-
+/**
+ * Group module component
+ * @param {*} param0 tab value of the selected tab
+ * @returns group component
+ * @author Mijoy M J
+ */
 function Group({ menuTabValue }) {
     const dispatch  = useDispatch(); 
     let groupData =[];
-    const MockData = useSelector(state => state.reducer.cmsReducer.zoneData);
-    MockData.forEach(element => {
+    const mockGroupData = useSelector(state => state.reducer.cmsReducer.zoneData);
+    mockGroupData.forEach(element => {
         element.groups.forEach(data=>{
             groupData.push(data);
         })
-    });
-    // const [groupData, setGroupData] = React.useState([...groupArray]);
+    });//Converting the response object to group data array
     console.log(groupData)
     const [open, setOpen] = React.useState(false);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(3);
     const [editableData, setEditableData]=React.useState('');
-    
+    /**
+     * To handle pagination page change operation
+     * @param {*} event page change event object
+     * @param {*} newPage newPage page no
+     */
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
-
+    /**
+     * To handle data setting of each page in pagination
+     * @param {*} event event object
+     */
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);
         setPage(0);
     };
+    /**
+     * To open edit popup
+     * @param {*} itemValue row data
+     */
     const handleOpen = (itemValue) => {
         setEditableData(itemValue);
         setOpen(true); 
         }
+    /**
+     * To close edit popup
+     */
     const handleClose = () => setOpen(false);
+    /**
+     * To handle activate deactivate group operation
+     * @param {*} rowData 
+     */
     const handleClick = (rowData) => {
         const baseURL = rowData.activeFlag ? 'http://localhost:8080/group/deactivateGroup' : 'http://localhost:8080/group/activateGroup';
     axios.put(`${baseURL}/${rowData.groupCode}`).then((response) => {

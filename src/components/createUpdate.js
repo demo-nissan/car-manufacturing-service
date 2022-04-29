@@ -23,7 +23,17 @@ const style = {
     boxShadow: 24,
     p: 4,
   };
-
+/**
+ * Common component for edit and update operations
+ * @param {*} param0 flag to check whether create or update action,
+ * close operation handling method,
+ * header value(Plant,Group and Zone),
+ * editable data if the action is update,
+ * index value of the row
+ * @returns Create/Update Pop Up component
+ * @author JOJO Joseph
+ * @author Mijoy M J
+ */
 function CreateUpdate({createOrUpdateStatus, handleClose, headerMenuValue, updateData, indexValue}) {
 
   const[productCodeValue, setProductCodeValue]=useState(0);
