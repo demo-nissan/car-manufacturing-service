@@ -27,8 +27,8 @@ function Group({ menuTabValue }) {
     const dispatch  = useDispatch(); 
     let groupData =[];
     const mockGroupData = useSelector(state => state.reducer.cmsReducer.zoneData);
-    mockGroupData.forEach(element => {
-        element.groups.forEach(data=>{
+    mockGroupData?.forEach(element => {
+        element?.groups?.forEach(data=>{
             groupData.push(data);
         })
     });//Converting the response object to group data array
