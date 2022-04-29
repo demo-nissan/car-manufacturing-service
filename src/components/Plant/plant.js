@@ -60,7 +60,7 @@ function Plant({menuTabValue}) {
   return (
     <div>
         <Paper sx={{  width: '100%', overflow: 'hidden' }}>
-        <TableContainer sx={{ maxHeight: 310 }}> 
+        <TableContainer sx={{ maxHeight: 310 }} component={Paper}> 
             <Table stickyHeader aria-label="sticky table">
                 <TableHead>
                     <TableRow>
@@ -88,7 +88,8 @@ function Plant({menuTabValue}) {
                              {
                              /* {stateMockData?.length === 0 ? 
                               <TableRow><div className='noRecordFoundDiv'>No Data Found...</div></TableRow> : */
-                              MockData && MockData
+                              [].concat(MockData)
+                              .sort((a, b) => a.plantCode > b.plantCode ? 1 : -1)
                               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                               .map((item, i) => (
                                 <TableRow
