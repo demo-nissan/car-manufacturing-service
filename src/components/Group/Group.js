@@ -16,8 +16,10 @@ import CreateUpdate from '../createUpdate';
 import TablePagination from '@mui/material/TablePagination';
 import { useDispatch, useSelector } from 'react-redux';
 import { getZoneData } from '../../actions/actions';
+import axios from "axios";
 
 function Group({ menuTabValue }) {
+    const dispatch  = useDispatch(); 
     let groupData =[];
     const MockData = useSelector(state => state.reducer.cmsReducer.zoneData);
     MockData.forEach(element => {
@@ -29,7 +31,7 @@ function Group({ menuTabValue }) {
     console.log(groupData)
     const [open, setOpen] = React.useState(false);
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [rowsPerPage, setRowsPerPage] = React.useState(3);
     const [editableData, setEditableData]=React.useState('');
     
     const handleChangePage = (event, newPage) => {
@@ -46,13 +48,11 @@ function Group({ menuTabValue }) {
         }
     const handleClose = () => setOpen(false);
     const handleClick = (rowData) => {
-        // const list = [...groupData]
-        // const i  = groupData.findIndex((data)=>{
-        //     return data.groupCode === rowData.groupCode;
-        // })
-        
-        // list[i]['activeFlag'] = rowData.activeFlag ? false : true;
-        // setGroupData(list);
+        const baseURL = rowData.activeFlag ? 'http://localhost:8080/group/deactivateGroup' : 'http://localhost:8080/group/activateGroup';
+    axios.put(`${baseURL}/${rowData.groupCode}`).then((response) => {
+        console.log(response)
+        dispatch(getZoneData());
+    });
     };
     return (
         <div className="Group" data-testid="Group">
@@ -105,7 +105,7 @@ function Group({ menuTabValue }) {
                     </Table>
                 </TableContainer>
                 <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
+                    rowsPerPageOptions={[3, 10, 25]}
                     component="div"
                     count={groupData.length}
                     rowsPerPage={rowsPerPage}
