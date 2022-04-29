@@ -98,7 +98,9 @@ function Zone({ menuTabValue }) {
                     </Modal>
 
                     <TableBody>
-                        {zoneArray && zoneArray
+                        {
+                        [].concat(zoneArray)
+                            .sort((a, b) => a.zoneCode > b.zoneCode ? 1 : -1)
                             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                             .map((item, i) => (
                                     <TableRow
