@@ -32,7 +32,7 @@ function Zone({ menuTabValue }) {
         })
     });
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(4);  
+    const [rowsPerPage, setRowsPerPage] = useState(3);  
     const [open, setOpen] = useState(false);
     const [editableData, setEditableData] = useState('');
     const handleOpen = (itemValue) => {
@@ -72,7 +72,7 @@ function Zone({ menuTabValue }) {
 
         <div>
             <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-            <TableContainer sx={{ maxHeight: 310 }}>
+            <TableContainer sx={{ maxHeight: 310 }} component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="a dense table">
                     <TableHead>
                         <TableRow>
@@ -125,7 +125,7 @@ function Zone({ menuTabValue }) {
                 </Table>
             </TableContainer>
             <TablePagination
-                rowsPerPageOptions={[4, 10, 25]}
+                rowsPerPageOptions={[3, 10, 25]}
                 component="div"
                 count={zoneArray?.length}
                 rowsPerPage={rowsPerPage}
